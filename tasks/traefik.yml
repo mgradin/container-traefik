@@ -3,7 +3,7 @@
   file: path="{{ VAR_TRAEFIK_DIR }}" recurse=yes state=directory
 
 - name: Copy traefik.toml
-  copy:
+  template:
     src: traefik.toml
     dest: "{{ VAR_TRAEFIK_DIR }}/traefik.toml"
     mode: 0644
