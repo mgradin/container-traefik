@@ -1,0 +1,30 @@
+---
+- name: Create traefik directory
+  file: path="{{ VAR_TRAEFIK_DIR }}" recurse=yes state=directory
+
+- name: Copy traefik.toml
+  copy:
+    src: traefik.toml
+    dest: "{{ VAR_TRAEFIK_DIR }}/traefik.toml"
+    mode: 0644
+
+- name: Copy acme.json
+  copy:
+    src: acme.json
+    dest: "{{ VAR_TRAEFIK_DIR }}/acme.json"
+    mode: 0600
+
+- name: Start traefik container
+  docker_container:
+    name: traefik
+    image: traefik:latest
+    pull: yes
+    state: started
+    ports:
+    - 80:80
+    - 443:443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - "{{ VAR_TRAEFIK_DIR }}/acme.json:/acme.json:z"
+      - "{{ VAR_TRAEFIK_DIR }}/traefik.toml:/traefik.toml:z"
+    restart_policy: unless-stopped

@@ -1,0 +1,5 @@
+---
+# tasks file for traefik
+- import_tasks: traefik.yml
+  become: true
+
