@@ -13,6 +13,7 @@
     src: acme.json
     dest: "{{ VAR_TRAEFIK_DIR }}/acme.json"
     mode: 0600
+    force: no
 
 - name: Start traefik container
   docker_container:
