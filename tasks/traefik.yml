@@ -13,7 +13,7 @@
 
 - name: Copy static config file
   copy:
-    src: traefik.yml
+    src: traefik.yaml
     dest: "{{ VAR_TRAEFIK_DIR }}"
     owner: root 
     group: root
