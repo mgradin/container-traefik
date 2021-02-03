@@ -19,6 +19,14 @@
     group: root
     mode: '0644'
 
+- name: Create dynamic config from template
+  template:
+    src: traefik-dynamic.yml.j2
+    dest: "{{ VAR_TRAEFIK_DIR }}/config/test.yml"
+    owner: root
+    group: root
+    mode: '0644'
+
 - name: Pull latest traefik image
   containers.podman.podman_image:
     name: traefik:latest

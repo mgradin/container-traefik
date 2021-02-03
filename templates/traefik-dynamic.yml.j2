@@ -1,0 +1,26 @@
+tls:
+  certificates:
+    - certFile: /etc/traefik/ssl/fullchain.pem
+      keyFile: /etc/traefik/ssl/privkey.pem
+      stores:
+        - default
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /etc/traefik/ssl/fullchain.pem
+        keyFile: /etc/traefik/ssl/privkey.pem
+
+http:
+  routers:
+{% for item in containers %}
+    {{ item }}_route:
+      entryPoints:
+      - "web"
+      - "web-secure"
+      middlewares:
+      - secure_mw
+      service: {{ item }}_service
+      rule: "Host(`{{ item }}.gradin.no`)"
+      tls:
+        options: default@file
+
