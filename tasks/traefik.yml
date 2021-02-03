@@ -1,6 +1,6 @@
 ---
 - name: Create traefik directory
-  file: 
+  file:
     path: "{{ VAR_TRAEFIK_DIR }}"
     recurse: yes
     state: directory
@@ -16,11 +16,10 @@
     name: traefik
     image: traefik:latest
     state: started
-    expose:
+    ports:
       - 80:80
       - 443:443
       - 8080:8080
     volumes:
-      - /home/saihtam/cvols/traefik/:/etc/traefik/
-      - "{{ VAR_TRAEFIK_DIR }}:/etc/traefik"
-      - "{{ VAR_TRAEFIK_SSL_DIR }}:/etc/traefik/ssl/"
+      - "{{ VAR_TRAEFIK_DIR }}:/etc/traefik/:Z"
+      - "{{ VAR_TRAEFIK_SSL_DIR }}:/etc/traefik/ssl/:Z"
