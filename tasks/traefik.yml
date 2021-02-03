@@ -15,7 +15,6 @@
   containers.podman.podman_container:
     name: traefik
     image: traefik:latest
-    pull: yes
     state: started
     expose:
       - 80:80
