@@ -11,6 +11,10 @@
     recurse: yes
     state: directory
 
+- name: Pull latest traefik image
+  container.podman.podman_image:
+    name: traefik:latest
+
 - name: Start traefik container
   containers.podman.podman_container:
     name: traefik
@@ -23,3 +27,13 @@
     volumes:
       - "{{ VAR_TRAEFIK_DIR }}:/etc/traefik/:Z"
       - "{{ VAR_TRAEFIK_SSL_DIR }}:/etc/traefik/ssl/:Z"
+
+- name: Create new systemd file
+  command: podman generate systemd --name traefik > /etc/systemd/system/container-traefik.service
+
+- name: restart container with systemd
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: traefik
+
