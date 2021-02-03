@@ -24,3 +24,10 @@ http:
       tls:
         options: default@file
 {% endfor %}
+{% for item in containers %}
+  services:
+    {{ item }}_service:
+      loadBalancer:
+        servers:
+        - url: {{ item['url'] }}
+{% endfor %}
