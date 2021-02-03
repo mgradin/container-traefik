@@ -12,7 +12,7 @@
     state: directory
 
 - name: Pull latest traefik image
-  container.podman.podman_image:
+  containers.podman.podman_image:
     name: traefik:latest
 
 - name: Start traefik container
