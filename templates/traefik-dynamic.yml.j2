@@ -13,20 +13,21 @@ tls:
 http:
   routers:
 {% for item in containers %}
-    {{ item }}_route:
+    {{ item.name }}_route:
       entryPoints:
       - "web"
       - "web-secure"
       middlewares:
       - secure_mw
-      service: {{ item }}_service
-      rule: "Host(`{{ item }}.gradin.no`)"
+      service: {{ item.name }}_service
+      rule: "Host(`{{ item.name }}.gradin.no`)"
       tls:
         options: default@file
 {% endfor %}
+
 {% for item in containers %}
   services:
-    {{ item }}_service:
+    {{ item.name }}_service:
       loadBalancer:
         servers:
         - url: {{ item.url }}
