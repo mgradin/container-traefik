@@ -11,6 +11,14 @@
     recurse: yes
     state: directory
 
+- name: Copy static config file
+  copy:
+    src: traefik.yml
+    dest: "{{ VAR_TRAEFIK_DIR }}"
+    owner: root 
+    group: root
+    mode: '0644'
+
 - name: Pull latest traefik image
   containers.podman.podman_image:
     name: traefik:latest
