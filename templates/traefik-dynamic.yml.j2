@@ -29,5 +29,5 @@ http:
     {{ item }}_service:
       loadBalancer:
         servers:
-        - url: {{ item['url'] }}
+        - url: {{ item.url }}
 {% endfor %}
