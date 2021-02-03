@@ -25,8 +25,8 @@ http:
         options: default@file
 {% endfor %}
 
-{% for item in containers %}
   services:
+{% for item in containers %}
     {{ item.name }}_service:
       loadBalancer:
         servers:
