@@ -27,13 +27,15 @@
     volumes:
       - "{{ VAR_TRAEFIK_DIR }}:/etc/traefik/:Z"
       - "{{ VAR_TRAEFIK_SSL_DIR }}:/etc/traefik/ssl/:Z"
+  register: container
 
 - name: Create new systemd file
   shell: podman generate systemd --name traefik > /etc/systemd/system/container-traefik.service
+  when: container.changed
 
 - name: restart container with systemd
   systemd:
     state: restarted
     daemon_reload: yes
     name: container-traefik
-
+  when: container.changed
