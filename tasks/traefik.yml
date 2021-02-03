@@ -29,7 +29,7 @@
       - "{{ VAR_TRAEFIK_SSL_DIR }}:/etc/traefik/ssl/:Z"
 
 - name: Create new systemd file
-  command: podman generate systemd --name traefik > /etc/systemd/system/container-traefik.service
+  shell: podman generate systemd --name traefik > /etc/systemd/system/container-traefik.service
 
 - name: restart container with systemd
   systemd:
