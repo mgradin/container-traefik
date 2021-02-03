@@ -32,3 +32,9 @@ http:
         servers:
         - url: {{ item.url }}
 {% endfor %}
+
+  middlewares:
+    secure_mw:
+      redirectScheme:
+        scheme: https
+
