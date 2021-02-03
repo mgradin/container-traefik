@@ -1,5 +1,4 @@
 ---
 # defaults file for traefik
 VAR_TRAEFIK_DIR: /opt/traefik
-VAR_TRAEFIK_DOMAIN: "my-awesome-app.org"
-VAR_TRAEFIK_EMAIL: "your-email-here@my-awesome-app.org"
+VAR_TRAEFIK_SSL_DIR: /opt/traefik/ssl
