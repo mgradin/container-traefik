@@ -22,7 +22,7 @@ http:
       service: {{ item.name }}_service
       rule: "Host(`{{ item.name }}.gradin.no`)"
       tls:
-        options: default@file
+        options:
 {% endfor %}
 
   services:
